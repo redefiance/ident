@@ -3,9 +3,9 @@ package ident
 import (
 	"errors"
 
-	"github.com/rogpeppe/rog-go/exp/go/ast"
-	"github.com/rogpeppe/rog-go/exp/go/parser"
-	"github.com/rogpeppe/rog-go/exp/go/types"
+	"github.com/npat-efault/godef/exp-go/ast"
+	"github.com/npat-efault/godef/exp-go/parser"
+	"github.com/npat-efault/godef/exp-go/types"
 )
 
 func lookup(filepath string, offset int) (Definition, error) {
