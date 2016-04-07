@@ -1,6 +1,6 @@
 package ident
 
-import "github.com/rogpeppe/rog-go/exp/go/token"
+import "github.com/npat-efault/godef/exp-go/token"
 
 // Definition is the code position that defines either a
 // - func
