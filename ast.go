@@ -4,10 +4,10 @@ import (
 	"path"
 	"path/filepath"
 
-	"github.com/rogpeppe/rog-go/exp/go/ast"
-	"github.com/rogpeppe/rog-go/exp/go/parser"
-	"github.com/rogpeppe/rog-go/exp/go/token"
-	"github.com/rogpeppe/rog-go/exp/go/types"
+	"github.com/npat-efault/godef/exp-go/ast"
+	"github.com/npat-efault/godef/exp-go/parser"
+	"github.com/npat-efault/godef/exp-go/token"
+	"github.com/npat-efault/godef/exp-go/types"
 )
 
 var fileset = types.FileSet
