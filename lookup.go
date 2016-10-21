@@ -3,15 +3,15 @@ package ident
 import (
 	"errors"
 
-	"code.google.com/p/rog-go/exp/go/ast"
-	"code.google.com/p/rog-go/exp/go/parser"
-	"code.google.com/p/rog-go/exp/go/types"
+	"github.com/rogpeppe/godef/go/ast"
+	"github.com/rogpeppe/godef/go/parser"
+	"github.com/rogpeppe/godef/go/types"
 )
 
 func lookup(filepath string, offset int) (Definition, error) {
 	def := Definition{}
 
-	f, err := parser.ParseFile(fileset, filepath, nil, 0, getScope(filepath))
+	f, err := parser.ParseFile(fileset, filepath, nil, 0, getScope(filepath), nil)
 	if err != nil {
 		return def, err
 	}
@@ -47,7 +47,7 @@ func lookup(filepath string, offset int) (Definition, error) {
 		return def, errors.New("could not find definition of identifier")
 	}
 
-	obj, _ := types.ExprType(ident, types.DefaultImporter)
+	obj, _ := types.ExprType(ident, types.DefaultImporter, fileset)
 	def.Name = obj.Name
 	def.Position = *pos
 	return def, nil

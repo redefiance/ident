@@ -5,8 +5,8 @@ import (
 	"path"
 	"strings"
 
-	"code.google.com/p/rog-go/exp/go/ast"
-	"code.google.com/p/rog-go/exp/go/parser"
+	"github.com/rogpeppe/godef/go/ast"
+	"github.com/rogpeppe/godef/go/parser"
 )
 
 func (def Definition) findReferences(searchpath string, recursive bool) (chan Reference, chan error) {
@@ -49,7 +49,12 @@ func (def Definition) findReferences(searchpath string, recursive bool) (chan Re
 	}
 
 	scanFile := func(filepath string) {
-		f, err := parser.ParseFile(fileset, filepath, nil, 0, getScope(filepath))
+		defer func() {
+			if e := recover(); e != nil {
+				return
+			}
+		}()
+		f, err := parser.ParseFile(fileset, filepath, nil, 0, getScope(filepath), nil)
 		if failed(err) {
 			return
 		}
@@ -61,7 +66,12 @@ func (def Definition) findReferences(searchpath string, recursive bool) (chan Re
 		filter := func(fi os.FileInfo) bool {
 			return path.Ext(fi.Name()) == ".go"
 		}
-		result, err := parser.ParseDir(fileset, dirpath, filter, 0)
+		defer func() {
+			if e := recover(); e != nil {
+				return
+			}
+		}()
+		result, err := parser.ParseDir(fileset, dirpath, filter, 0, nil)
 		if failed(err) {
 			return
 		}
